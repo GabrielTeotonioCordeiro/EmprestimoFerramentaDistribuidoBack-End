@@ -3,7 +3,6 @@ package modelo;
 import dao.AmigoDAO;
 import java.util.ArrayList;
 import java.util.List;
-import service.EmprestimoService;
 
 /**
  * Representa um amigo com id, nome e telefone.
@@ -123,9 +122,9 @@ public class Amigo {
     }
     
     public static List<Emprestimo> buscarEmprestimosDoAmigo(int id, boolean apenasAtivos) {
-        EmprestimoService empService = new EmprestimoService();
-        List<Emprestimo> lista = apenasAtivos ? empService.getListaEmprestimoAtivo()
-                : empService.listaEmprestimo();
+        Emprestimo emp = new Emprestimo();
+        List<Emprestimo> lista = apenasAtivos ? emp.getListaEmprestimoAtivo()
+                : emp.listaEmprestimo();
         
         List<Emprestimo> resultado = new ArrayList<>();
         for (Emprestimo e : lista) {
