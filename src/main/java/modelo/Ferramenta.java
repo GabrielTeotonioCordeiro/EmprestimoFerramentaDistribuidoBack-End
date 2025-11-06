@@ -4,7 +4,7 @@ import dao.EmprestimoDAO;
 import dao.FerramentaDAO;
 import java.util.List;
 
-public class Ferramenta {
+public class Ferramenta implements IFerramenta {
 
     private int idFerramenta;
     private String nomeFerramenta;
@@ -43,21 +43,24 @@ public class Ferramenta {
      *
      * @return O nome da ferramenta.
      */
+    @Override
     public String getNomeFerramenta() {
         return nomeFerramenta;
     }
-    
-    public static String buscarNomePorId(int id) {
-    FerramentaDAO dao = new FerramentaDAO();
-    List<Ferramenta> listaFerramenta = dao.getListaFerramenta();
-    for (Ferramenta f : listaFerramenta) {
-        if (f.getIdFerramenta() == id) {
-            return f.getNomeFerramenta();
-        }
-    }
-    return "";
-}
 
+    @Override
+    public String buscarNomePorId(int id) {
+        FerramentaDAO dao = new FerramentaDAO();
+        List<Ferramenta> listaFerramenta = dao.getListaFerramenta();
+        for (Ferramenta f : listaFerramenta) {
+            if (f.getIdFerramenta() == id) {
+                return f.getNomeFerramenta();
+            }
+        }
+        return "";
+    }
+
+    @Override
     public void setNomeFerramenta(String nome) {
         this.nomeFerramenta = nome;
     }
@@ -67,10 +70,12 @@ public class Ferramenta {
      *
      * @return O custo da ferramenta.
      */
+    @Override
     public double getCustoFerramenta() {
         return custoFerramenta;
     }
 
+    @Override
     public void setCustoFerramenta(double custo) {
         this.custoFerramenta = custo;
     }
@@ -78,55 +83,65 @@ public class Ferramenta {
     /**
      * metodos de banco de dados
      */
+    @Override
     public boolean salvar() {
         FerramentaDAO dao = new FerramentaDAO();
         return dao.insertFerramentaDB(this);
     }
 
+    @Override
     public boolean atualizar() {
         FerramentaDAO dao = new FerramentaDAO();
         return dao.updateFerramentaDB(this);
     }
 
+    @Override
     public boolean deletar() {
         FerramentaDAO dao = new FerramentaDAO();
         return dao.deleteFerramentaDB(this.idFerramenta);
     }
 
 // Método estático, porque não depende de uma instância
-    public static Ferramenta buscarPorId(int id) {
+    @Override
+    public Ferramenta buscarPorId(int id) {
         FerramentaDAO dao = new FerramentaDAO();
         return dao.retrieveFerramentaDB(id);
     }
 
 // Também pode ser estático
-    public static List<Ferramenta> listarTodas() {
+    @Override
+    public List<Ferramenta> listarTodas() {
         FerramentaDAO dao = new FerramentaDAO();
         return dao.getListaFerramenta();
     }
 
 // E para gerar um novo ID quando criar uma ferramenta nova
-    public static int proximoID() {
+    @Override
+    public int proximoID() {
         FerramentaDAO dao = new FerramentaDAO();
         return dao.maiorIDFerramenta() + 1;
     }
 
+    @Override
     public boolean insertFerramentaDB(String nome, String marca, double custo) {
-        Ferramenta ferramenta = new Ferramenta(Ferramenta.proximoID(), nome, custo, marca);
+        Ferramenta ferramenta = new Ferramenta(proximoID(), nome, custo, marca);
         return ferramenta.salvar();
     }
 
+    @Override
     public boolean updateFerramentaDB(int id, String nome, String marca, double custo) {
         Ferramenta ferramenta = new Ferramenta(id, nome, custo, marca);
         return ferramenta.atualizar();
     }
 
+    @Override
     public boolean deleteFerramentaDB(int id) {
         Ferramenta ferramenta = new Ferramenta();
         ferramenta.setIdFerramenta(id);
         return ferramenta.deletar();
     }
 
+    @Override
     public String getDisponivel() {
         EmprestimoDAO empDAO = new EmprestimoDAO();
         List<Emprestimo> emprestimosAtivos = empDAO.getListaEmprestimo();
@@ -139,6 +154,7 @@ public class Ferramenta {
         return "Sim";
     }
 
+    @Override
     public boolean possuiEmprestimoAtivo() {
         EmprestimoDAO empDAO = new EmprestimoDAO();
         List<Emprestimo> emprestimosAtivos = empDAO.getListaEmprestimo();
@@ -151,6 +167,7 @@ public class Ferramenta {
         return false;
     }
 
+    @Override
     public int quantidadeEmprestimo() {
         EmprestimoDAO empDAO = new EmprestimoDAO();
         List<Emprestimo> emprestimos = empDAO.getListaEmprestimo();
@@ -176,18 +193,22 @@ public class Ferramenta {
      *
      * @return A marca da ferramenta.
      */
+    @Override
     public String getMarcaFerramenta() {
         return marcaFerramenta;
     }
 
+    @Override
     public void setMarcaFerramenta(String marca) {
         this.marcaFerramenta = marca;
     }
 
+    @Override
     public int getIdFerramenta() {
         return idFerramenta;
     }
 
+    @Override
     public void setIdFerramenta(int idFerramenta) {
         this.idFerramenta = idFerramenta;
     }
