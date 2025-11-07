@@ -1,6 +1,7 @@
 package modelo;
 
 import dao.EmprestimoDAO;
+import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
  * Representa um emprestimo com id, id do amigo, id da ferramenta, data de
  * emprestimo e data de devolução.
  */
-public class Emprestimo {
+public class Emprestimo implements IEmprestimo{
 
     private int idEmprestimo;
     private int idAmigo;
@@ -65,6 +66,7 @@ public class Emprestimo {
      * @return o id do emprestimo.
      *
      */
+    @Override
     public int getIDEmprestimo() {
         return idEmprestimo;
     }
@@ -74,6 +76,7 @@ public class Emprestimo {
      *
      * @param idEmprestimo O id do emprestimo a ser definido.
      */
+    @Override
     public void setIDEmprestimo(int idEmprestimo) {
         this.idEmprestimo = idEmprestimo;
     }
@@ -84,6 +87,7 @@ public class Emprestimo {
      * @return para quem foi emprestado.
      *
      */
+    @Override
     public int getIDAmigo() {
         return idAmigo;
     }
@@ -93,6 +97,7 @@ public class Emprestimo {
      *
      * @param idAmigo O id do amigo a ser definido.
      */
+    @Override
     public void setIDAmigo(int idAmigo) {
         this.idAmigo = idAmigo;
     }
@@ -103,6 +108,7 @@ public class Emprestimo {
      * @return o id da ferramenta.
      *
      */
+    @Override
     public int getIDFerramenta() {
         return idFerramenta;
     }
@@ -112,6 +118,7 @@ public class Emprestimo {
      *
      * @param idFerramenta O id da ferramenta a ser definido.
      */
+    @Override
     public void setIDFerramenta(int idFerramenta) {
         this.idFerramenta = idFerramenta;
     }
@@ -121,6 +128,7 @@ public class Emprestimo {
      *
      * @return A data do emprestimo.
      */
+    @Override
     public String getDataEmprestimo() {
         return dataEmprestimo;
     }
@@ -130,6 +138,7 @@ public class Emprestimo {
      *
      * @param dataEmprestimo A data do emprestimo a ser definida.
      */
+    @Override
     public void setDataEmprestimo(String dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
@@ -139,6 +148,7 @@ public class Emprestimo {
      *
      * @return A data de devolução do emprestimo.
      */
+    @Override
     public String getDataDevolucao() {
         return dataDevolucao;
     }
@@ -148,6 +158,7 @@ public class Emprestimo {
      *
      * @param dataDevolucao A data de devolução do emprestimo a ser definida.
      */
+    @Override
     public void setDataDevolucao(String dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
@@ -160,6 +171,7 @@ public class Emprestimo {
      * @param dataEmprestimo Data do emprestimo a ser inserido.
      * @return true se a inserção for bem-sucedida, false caso contrário.
      */
+    @Override
     public boolean insertEmprestimoDB(int idAmigo, int idFerramenta, String dataEmprestimo) {
         int maiorID = emprestimoDAO.maiorIDEmprestimo() + 1;
         Emprestimo emprestimo = new Emprestimo(maiorID, idAmigo, idFerramenta, dataEmprestimo, "");
@@ -174,6 +186,7 @@ public class Emprestimo {
      * @param idEmprestimo O ID do emprestimo a ser removido.
      * @return true se a remoção for bem-sucedida, false caso contrário.
      */
+    @Override
     public boolean deleteEmprestimoDB(int idEmprestimo) {
         emprestimoDAO.deleteEmprestimoDB(idEmprestimo);
         return true;
@@ -189,6 +202,7 @@ public class Emprestimo {
      * @param dataDevolucao A Data de devolução da ferramenta a ser atualizada.
      * @return true se a inserção for bem-sucedida, false caso contrário.
      */
+    @Override
     public boolean updateEmprestimoDB(int idEmprestimo, int idAmigo, int idFerramenta, String dataEmprestimo, String dataDevolucao) {
         logger.log(Level.INFO, "Data de devolução recebida: {0}", dataDevolucao);
         Emprestimo emprestimo = new Emprestimo(idEmprestimo, idAmigo, idFerramenta, dataEmprestimo, dataDevolucao);
@@ -203,6 +217,7 @@ public class Emprestimo {
      * @param idEmprestimo O ID do Emprestimo a ser recuperado.
      * @return O emprestimo recuperado do banco de dados.
      */
+    @Override
     public Emprestimo retrieveEmprestimoDB(int idEmprestimo) {
         return emprestimoDAO.retrieveEmprestimoDB(idEmprestimo);
     }
@@ -212,10 +227,11 @@ public class Emprestimo {
      *
      * @return O maior ID de emprestimo no banco de dados.
      */
+    @Override
     public int maiorID() {
         return emprestimoDAO.maiorIDEmprestimo();
     }
-
+    @Override
     public List<Emprestimo> getListaEmprestimoAtivo() {
         ArrayList<Emprestimo> listaEmprestimoAtivo = new ArrayList<>();
         try {
@@ -243,7 +259,7 @@ public class Emprestimo {
 
         return listaEmprestimoAtivo;
     }
-
+    @Override 
     public String emprestimoAtivo(int idEmprestimo) {
         String ativo = "Não";
         Emprestimo emp = new Emprestimo();
