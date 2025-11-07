@@ -12,10 +12,8 @@ public interface IEmprestimo extends Remote {
 
     public boolean deleteEmprestimoDB(int id) throws RemoteException;
 
-
     public String emprestimoAtivo(int idEmprestimo) throws RemoteException;
 
-    
     public String getDataEmprestimo() throws RemoteException;
     
     public int getIDEmprestimo() throws RemoteException;
@@ -40,7 +38,5 @@ public interface IEmprestimo extends Remote {
      
      public int maiorID()throws RemoteException;
      
-     public List<Emprestimo> getListaEmprestimoAtivo() throws RemoteException;
-     
-     
+     public List<Emprestimo> getListaEmprestimoAtivo() throws RemoteException;  
 }
