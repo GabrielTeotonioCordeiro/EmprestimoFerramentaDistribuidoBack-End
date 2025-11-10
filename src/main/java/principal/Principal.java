@@ -20,10 +20,13 @@ public class Principal {
             IAmigo iAmi = (IAmigo) UnicastRemoteObject.exportObject((ami), 0);
             IEmprestimo iEmp = (IEmprestimo) UnicastRemoteObject.exportObject(emp, 0);
             IFerramenta iFer = (IFerramenta) UnicastRemoteObject.exportObject(fer, 0);
-            Registry registro = LocateRegistry.createRegistry(1099);
-            registro.bind("AmigoService", iAmi);
-            registro.bind("EmprestimoService", iEmp);
-            registro.bind("FerramentaService", iFer);
+            Registry registroAmigo = LocateRegistry.createRegistry(1098);
+            Registry registroEmprestimo = LocateRegistry.createRegistry(1099);
+            Registry registroFerramenta = LocateRegistry.createRegistry(1100);
+            
+            registroAmigo.bind("AmigoService", iAmi);
+            registroEmprestimo.bind("EmprestimoService", iEmp);
+            registroFerramenta.bind("FerramentaService", iFer);
             System.out.println("Servidor no Ar. Nome do objeto Servidor: \' mensagens\'");
         } catch (Exception e) {
             System.out.println("Excessão: " + e);
