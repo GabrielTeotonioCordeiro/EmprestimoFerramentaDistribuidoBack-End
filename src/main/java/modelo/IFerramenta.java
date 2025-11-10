@@ -24,7 +24,7 @@ public interface IFerramenta extends Remote {
 
     public Ferramenta buscarPorId(int id) throws RemoteException;
 
-    public List<String> listarTodas() throws RemoteException;
+    public List<String[]> listarTodas() throws RemoteException;
 
     public int proximoID() throws RemoteException;
 
