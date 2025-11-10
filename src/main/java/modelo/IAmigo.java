@@ -20,7 +20,7 @@ public interface IAmigo extends Remote {
 
     public List<String[]> listarTodos() throws RemoteException;
 
-    public String insertAmigoDB(String nome, String telefone) throws RemoteException;
+    public boolean insertAmigoDB(String nome, String telefone) throws RemoteException;
 
     public boolean deleteAmigoDB(int id) throws RemoteException;
 
