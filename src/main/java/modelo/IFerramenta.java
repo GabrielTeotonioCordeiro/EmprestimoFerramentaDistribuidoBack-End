@@ -24,7 +24,7 @@ public interface IFerramenta extends Remote {
 
     public Ferramenta buscarPorId(int id) throws RemoteException;
 
-    public List<Ferramenta> listarTodas() throws RemoteException;
+    public String[] listarTodas() throws RemoteException;
 
     public int proximoID() throws RemoteException;
 
@@ -47,5 +47,4 @@ public interface IFerramenta extends Remote {
     public int getIdFerramenta() throws RemoteException;
 
     public void setIdFerramenta(int idFerramenta) throws RemoteException;
-
 }
