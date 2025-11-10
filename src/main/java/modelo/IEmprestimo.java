@@ -34,7 +34,7 @@ public interface IEmprestimo extends Remote {
 
     public void setDataDevolucao(String dataDevolucao) throws RemoteException;
 
-    public Emprestimo retrieveEmprestimoDB(int idEmprestimo) throws RemoteException;
+    public IEmprestimo retrieveEmprestimoDB(int idEmprestimo) throws RemoteException;
 
     public int maiorID() throws RemoteException;
 
