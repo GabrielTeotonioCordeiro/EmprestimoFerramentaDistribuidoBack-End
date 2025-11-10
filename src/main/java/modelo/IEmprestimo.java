@@ -38,5 +38,5 @@ public interface IEmprestimo extends Remote {
 
     public int maiorID() throws RemoteException;
 
-    public List<String> getListaEmprestimoAtivo() throws RemoteException;
+    public List<String[]> getListaEmprestimoAtivo() throws RemoteException;
 }
