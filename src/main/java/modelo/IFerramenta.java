@@ -22,7 +22,7 @@ public interface IFerramenta extends Remote {
 
     public boolean deletar() throws RemoteException;
 
-    public Ferramenta buscarPorId(int id) throws RemoteException;
+    public IFerramenta buscarPorId(int id) throws RemoteException;
 
     public List<String[]> listarTodas() throws RemoteException;
 
