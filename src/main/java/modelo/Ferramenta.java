@@ -2,6 +2,7 @@ package modelo;
 
 import dao.EmprestimoDAO;
 import dao.FerramentaDAO;
+import java.rmi.RemoteException;
 import java.util.List;
 
 public class Ferramenta implements IFerramenta {
@@ -110,9 +111,14 @@ public class Ferramenta implements IFerramenta {
 
 // Também pode ser estático
     @Override
-    public List<Ferramenta> listarTodas() {
+    public List<String[]> listarTodas() throws RemoteException {
         FerramentaDAO dao = new FerramentaDAO();
-        return dao.getListaFerramenta();
+        List<IFerramenta> lista = dao.getListaFerramenta();
+        List<String[]> resultado = null;
+        for (IFerramenta ferramenta : lista) {
+            resultado.add(new String[]{(ferramenta.getIdFerramenta() + ""), ferramenta.getNomeFerramenta(), ferramenta.getMarcaFerramenta(), (ferramenta.getCustoFerramenta() + "")});
+        }
+        return resultado;
     }
 
 // E para gerar um novo ID quando criar uma ferramenta nova

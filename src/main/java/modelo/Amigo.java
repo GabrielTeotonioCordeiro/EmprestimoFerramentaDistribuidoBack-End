@@ -97,11 +97,11 @@ public class Amigo implements IAmigo {
     }
 
     @Override
-    public List<String[]> listarTodos() {
+    public List<String[]> listarTodos() throws RemoteException {
         AmigoDAO dao = new AmigoDAO();
         List<IAmigo> lista = dao.getListaAmigo();
         List<String[]> resultado = null;
-        for(IAmigo amigo : lista){
+        for (IAmigo amigo : lista) {
             resultado.add(new String[]{String.valueOf(amigo.getIdAmigo()), amigo.getNomeAmigo(), amigo.getTelefone()});
         }
         return resultado;
@@ -145,11 +145,11 @@ public class Amigo implements IAmigo {
 
     @Override
     public boolean possuiEmprestimoAtivo(int id) throws RemoteException {
-            boolean emprestimoAtivo = false;
+        boolean emprestimoAtivo = false;
 
         Emprestimo emp = new Emprestimo();
 
-        List<IEmprestimo> listaEmprestimo = emp.getListaEmprestimoAtivoEmprestimo();
+        List<IEmprestimo> listaEmprestimo = emp.getListaEmprestimoAtivoIEmprestimo();
         for (int i = 0; i < listaEmprestimo.size(); i++) {
             if (listaEmprestimo.get(i).getIDAmigo() == id) {
                 emprestimoAtivo = true;
@@ -157,7 +157,6 @@ public class Amigo implements IAmigo {
         }
         return emprestimoAtivo;
     }
-
 
     @Override
     public int quantidadeDeEmprestimos(int id) {
@@ -172,9 +171,8 @@ public class Amigo implements IAmigo {
         return som;
     }
 
-
     @Override
-    public String obterNomePorId(int id) {
+    public String obterNomePorId(int id) throws RemoteException {
         for (String[] a : listarTodos()) {
             if (Integer.parseInt(a[0]) == id) {
                 return a[0];
