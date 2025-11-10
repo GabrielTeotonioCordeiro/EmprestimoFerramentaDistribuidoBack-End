@@ -1,6 +1,7 @@
 package modelo;
 
 import dao.AmigoDAO;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,9 +97,14 @@ public class Amigo implements IAmigo {
     }
 
     @Override
-    public List<Amigo> listarTodos() {
+    public List<String[]> listarTodos() {
         AmigoDAO dao = new AmigoDAO();
-        return dao.getListaAmigo();
+        List<IAmigo> lista = dao.getListaAmigo();
+        List<String[]> resultado = null;
+        for(IAmigo amigo : lista){
+            resultado.add(new String[]{String.valueOf(amigo.getIdAmigo()), amigo.getNomeAmigo(), amigo.getTelefone()});
+        }
+        return resultado;
     }
 
     @Override
@@ -126,7 +132,7 @@ public class Amigo implements IAmigo {
     }
 
     @Override
-    public Amigo retrieveAmigoDB(int id) {
+    public IAmigo retrieveAmigoDB(int id) {
         AmigoDAO dao = new AmigoDAO();
         return dao.retrieveAmigoDB(id);
     }
@@ -138,35 +144,40 @@ public class Amigo implements IAmigo {
     }
 
     @Override
-    public List<Emprestimo> buscarEmprestimosDoAmigo(int id, boolean apenasAtivos) {
-        Emprestimo emp = new Emprestimo();
-        List<Emprestimo> lista = apenasAtivos ? emp.getListaEmprestimoAtivo()
-                : emp.listaEmprestimo();
+    public boolean possuiEmprestimoAtivo(int id) throws RemoteException {
+            boolean emprestimoAtivo = false;
 
-        List<Emprestimo> resultado = new ArrayList<>();
-        for (Emprestimo e : lista) {
-            if (e.getIDAmigo() == id) {
-                resultado.add(e);
+        Emprestimo emp = new Emprestimo();
+
+        List<IEmprestimo> listaEmprestimo = emp.getListaEmprestimoAtivoEmprestimo();
+        for (int i = 0; i < listaEmprestimo.size(); i++) {
+            if (listaEmprestimo.get(i).getIDAmigo() == id) {
+                emprestimoAtivo = true;
             }
         }
-        return resultado;
+        return emprestimoAtivo;
     }
 
-    @Override
-    public boolean possuiEmprestimoAtivo(int id) {
-        return !buscarEmprestimosDoAmigo(id, true).isEmpty();
-    }
 
     @Override
     public int quantidadeDeEmprestimos(int id) {
-        return buscarEmprestimosDoAmigo(id, false).size();
+        int som = 0;
+        Emprestimo emp = new Emprestimo();
+        List<String[]> listaEmprestimo = emp.listaEmprestimo();
+        for (String[] vetor : listaEmprestimo) {
+            if (Integer.parseInt(vetor[1]) == id) {
+                som++;
+            }
+        }
+        return som;
     }
+
 
     @Override
     public String obterNomePorId(int id) {
-        for (Amigo a : listarTodos()) {
-            if (a.getIdAmigo() == id) {
-                return a.getNomeAmigo();
+        for (String[] a : listarTodos()) {
+            if (Integer.parseInt(a[0]) == id) {
+                return a[0];
             }
         }
         return "";
