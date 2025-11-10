@@ -232,12 +232,11 @@ public class Emprestimo implements IEmprestimo{
         return emprestimoDAO.maiorIDEmprestimo();
     }
     @Override
-    public List<Emprestimo> getListaEmprestimoAtivo() {
-        ArrayList<Emprestimo> listaEmprestimoAtivo = new ArrayList<>();
+    public List<String[]> getListaEmprestimoAtivo() throws RemoteException {
+        ArrayList<IEmprestimo> listaEmprestimoAtivo = new ArrayList<>();
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            List<Emprestimo> listaEmprestimo = this.listaEmprestimo();
-
+            List<IEmprestimo> listaEmprestimo = emprestimoDAO.getListaEmprestimo();
             for (int i = 0; i < listaEmprestimo.size(); i++) {
 
                 if ((!"null".equals(listaEmprestimo.get(i).getDataDevolucao())) && (!"".equals(listaEmprestimo.get(i).getDataDevolucao()))) {
@@ -256,16 +255,24 @@ public class Emprestimo implements IEmprestimo{
         } catch (ParseException erro) {
             logger.log(Level.SEVERE, "Erro: formato da data inválido", erro);
         }
-
-        return listaEmprestimoAtivo;
+        List<String[]> resultado = new ArrayList<>();
+        for (IEmprestimo a : listaEmprestimoAtivo) {
+            resultado.add(new String[]{String.valueOf(a.getIDEmprestimo()),
+                String.valueOf(a.getIDAmigo()),
+                String.valueOf(a.getIDFerramenta()),
+                a.getDataEmprestimo(),
+                a.getDataDevolucao()});
+        }
+        return resultado;
     }
+
     @Override 
-    public String emprestimoAtivo(int idEmprestimo) {
+    public String emprestimoAtivo(int idEmprestimo) throws RemoteException {
         String ativo = "Não";
         Emprestimo emp = new Emprestimo();
-        List<Emprestimo> listaEmprestimoAtivo = emp.getListaEmprestimoAtivo();
+        List<String[]> listaEmprestimoAtivo = emp.getListaEmprestimoAtivo();
         for (int i = 0; i < listaEmprestimoAtivo.size(); i++) {
-            if (listaEmprestimoAtivo.get(i).getIDEmprestimo() == idEmprestimo) {
+            if (Integer.parseInt(listaEmprestimoAtivo.get(i)[0])== idEmprestimo) {
                 ativo = "Sim";
             }
         }
