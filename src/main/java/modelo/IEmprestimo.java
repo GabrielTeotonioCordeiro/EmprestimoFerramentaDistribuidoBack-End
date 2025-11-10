@@ -15,28 +15,28 @@ public interface IEmprestimo extends Remote {
     public String emprestimoAtivo(int idEmprestimo) throws RemoteException;
 
     public String getDataEmprestimo() throws RemoteException;
-    
+
     public int getIDEmprestimo() throws RemoteException;
-    
-    public void setIDEmprestimo(int idEmprestimo)throws RemoteException;
-    
+
+    public void setIDEmprestimo(int idEmprestimo) throws RemoteException;
+
     public int getIDAmigo() throws RemoteException;
-    
+
     public void setIDAmigo(int idAmigo) throws RemoteException;
-    
-     public int getIDFerramenta()throws RemoteException;
-     
-     public void setIDFerramenta(int idFerramenta)throws RemoteException;
-     
-     public void setDataEmprestimo(String dataEmprestimo) throws RemoteException;
-     
-     public String getDataDevolucao()throws RemoteException;
-     
-     public void setDataDevolucao(String dataDevolucao)throws RemoteException;
-     
-     public Emprestimo retrieveEmprestimoDB(int idEmprestimo) throws RemoteException;
-     
-     public int maiorID()throws RemoteException;
-     
-     public List<Emprestimo> getListaEmprestimoAtivo() throws RemoteException;  
+
+    public int getIDFerramenta() throws RemoteException;
+
+    public void setIDFerramenta(int idFerramenta) throws RemoteException;
+
+    public void setDataEmprestimo(String dataEmprestimo) throws RemoteException;
+
+    public String getDataDevolucao() throws RemoteException;
+
+    public void setDataDevolucao(String dataDevolucao) throws RemoteException;
+
+    public Emprestimo retrieveEmprestimoDB(int idEmprestimo) throws RemoteException;
+
+    public int maiorID() throws RemoteException;
+
+    public List<String> getListaEmprestimoAtivo() throws RemoteException;
 }
