@@ -27,9 +27,18 @@ public class Emprestimo implements IEmprestimo {
     private static final Logger logger = Logger.getLogger(Emprestimo.class.getName());
 
     private EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
-@Override
-    public List<IEmprestimo> listaEmprestimo() {
-        return emprestimoDAO.getListaEmprestimo();
+    @Override
+    public List<String[]> listaEmprestimo() throws RemoteException {
+        List <String[]> resultado = null;
+        List <IEmprestimo> lista = emprestimoDAO.getListaEmprestimo();
+        for(IEmprestimo emprestimo : lista){
+            resultado.add(new String[]{String.valueOf(emprestimo.getIDEmprestimo()),
+                String.valueOf(emprestimo.getIDAmigo()),
+                String.valueOf(emprestimo.getIDFerramenta()),
+                emprestimo.getDataEmprestimo(),
+                emprestimo.getDataDevolucao()});
+        }
+        return resultado;
     }
 
     /**

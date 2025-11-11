@@ -40,5 +40,5 @@ public interface IEmprestimo extends Remote {
 
     public List<String[]> getListaEmprestimoAtivo() throws RemoteException;
     
-    public List<IEmprestimo> listaEmprestimo() throws RemoteException;
+    public List<String[]> listaEmprestimo() throws RemoteException;
 }

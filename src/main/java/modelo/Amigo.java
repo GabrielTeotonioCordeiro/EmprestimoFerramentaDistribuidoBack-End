@@ -163,9 +163,9 @@ public class Amigo implements IAmigo {
     public int quantidadeDeEmprestimos(int id) throws RemoteException {
         int som = 0;
         Emprestimo emp = new Emprestimo();
-        List<IEmprestimo> listaEmprestimo = emp.listaEmprestimo();
-        for (IEmprestimo vetor : listaEmprestimo) {
-            if (vetor.getIDAmigo() == id) {
+        List<String[]> listaEmprestimo = emp.listaEmprestimo();
+        for (String[] vetor : listaEmprestimo) {
+            if (Integer.parseInt(vetor[1]) == id) {
                 som++;
             }
         }
