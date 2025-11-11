@@ -151,12 +151,12 @@ public class Ferramenta implements IFerramenta {
     }
 
     @Override
-    public String getDisponivel() throws RemoteException {
+    public String getDisponivel(int id) throws RemoteException {
         EmprestimoDAO empDAO = new EmprestimoDAO();
         List<IEmprestimo> emprestimosAtivos = empDAO.getListaEmprestimo();
 
         for (IEmprestimo e : emprestimosAtivos) {
-            if (e.getIDFerramenta() == this.idFerramenta) {
+            if (id == e.getIDFerramenta()) {
                 return "Não";
             }
         }
