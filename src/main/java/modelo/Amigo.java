@@ -1,8 +1,9 @@
 package modelo;
 
+import servico.IAmigo;
+import servico.IEmprestimo;
 import dao.AmigoDAO;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Amigo implements IAmigo {

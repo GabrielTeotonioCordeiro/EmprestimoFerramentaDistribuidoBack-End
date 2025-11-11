@@ -1,4 +1,4 @@
-package modelo;
+package servico;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -39,4 +39,6 @@ public interface IEmprestimo extends Remote {
     public int maiorID() throws RemoteException;
 
     public List<String[]> getListaEmprestimoAtivo() throws RemoteException;
+    
+    public List<IEmprestimo> listaEmprestimo() throws RemoteException;
 }

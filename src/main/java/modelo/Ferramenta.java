@@ -1,5 +1,6 @@
 package modelo;
 
+import servico.IFerramenta;
 import dao.EmprestimoDAO;
 import dao.FerramentaDAO;
 import java.rmi.RemoteException;

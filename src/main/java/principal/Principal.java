@@ -6,9 +6,9 @@ import java.rmi.server.UnicastRemoteObject;
 import modelo.Amigo;
 import modelo.Emprestimo;
 import modelo.Ferramenta;
-import modelo.IAmigo;
-import modelo.IEmprestimo;
-import modelo.IFerramenta;
+import servico.IAmigo;
+import servico.IEmprestimo;
+import servico.IFerramenta;
 
 public class Principal {
 

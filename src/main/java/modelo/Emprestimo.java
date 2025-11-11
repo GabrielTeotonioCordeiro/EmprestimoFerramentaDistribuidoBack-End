@@ -1,5 +1,6 @@
 package modelo;
 
+import servico.IEmprestimo;
 import dao.EmprestimoDAO;
 import java.rmi.RemoteException;
 import java.text.ParseException;
@@ -26,7 +27,7 @@ public class Emprestimo implements IEmprestimo {
     private static final Logger logger = Logger.getLogger(Emprestimo.class.getName());
 
     private EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
-
+@Override
     public List<IEmprestimo> listaEmprestimo() {
         return emprestimoDAO.getListaEmprestimo();
     }
