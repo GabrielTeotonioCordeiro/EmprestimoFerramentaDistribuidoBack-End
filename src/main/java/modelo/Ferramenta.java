@@ -5,6 +5,7 @@ import dao.EmprestimoDAO;
 import dao.FerramentaDAO;
 import java.rmi.RemoteException;
 import java.util.List;
+import servico.IEmprestimo;
 
 public class Ferramenta implements IFerramenta {
 
@@ -51,10 +52,10 @@ public class Ferramenta implements IFerramenta {
     }
 
     @Override
-    public String buscarNomePorId(int id) {
+    public String buscarNomePorId(int id) throws RemoteException {
         FerramentaDAO dao = new FerramentaDAO();
-        List<Ferramenta> listaFerramenta = dao.getListaFerramenta();
-        for (Ferramenta f : listaFerramenta) {
+        List<IFerramenta> listaFerramenta = dao.getListaFerramenta();
+        for (IFerramenta f : listaFerramenta) {
             if (f.getIdFerramenta() == id) {
                 return f.getNomeFerramenta();
             }
@@ -149,11 +150,11 @@ public class Ferramenta implements IFerramenta {
     }
 
     @Override
-    public String getDisponivel() {
+    public String getDisponivel() throws RemoteException {
         EmprestimoDAO empDAO = new EmprestimoDAO();
-        List<Emprestimo> emprestimosAtivos = empDAO.getListaEmprestimo();
+        List<IEmprestimo> emprestimosAtivos = empDAO.getListaEmprestimo();
 
-        for (Emprestimo e : emprestimosAtivos) {
+        for (IEmprestimo e : emprestimosAtivos) {
             if (e.getIDFerramenta() == this.idFerramenta) {
                 return "Não";
             }
@@ -162,11 +163,11 @@ public class Ferramenta implements IFerramenta {
     }
 
     @Override
-    public boolean possuiEmprestimoAtivo() {
+    public boolean possuiEmprestimoAtivo() throws RemoteException {
         EmprestimoDAO empDAO = new EmprestimoDAO();
-        List<Emprestimo> emprestimosAtivos = empDAO.getListaEmprestimo();
+        List<IEmprestimo> emprestimosAtivos = empDAO.getListaEmprestimo();
 
-        for (Emprestimo e : emprestimosAtivos) {
+        for (IEmprestimo e : emprestimosAtivos) {
             if (e.getIDFerramenta() == this.idFerramenta) {
                 return true;
             }
@@ -175,12 +176,12 @@ public class Ferramenta implements IFerramenta {
     }
 
     @Override
-    public int quantidadeEmprestimo() {
+    public int quantidadeEmprestimo() throws RemoteException {
         EmprestimoDAO empDAO = new EmprestimoDAO();
-        List<Emprestimo> emprestimos = empDAO.getListaEmprestimo();
+        List<IEmprestimo> emprestimos = empDAO.getListaEmprestimo();
 
         int contador = 0;
-        for (Emprestimo e : emprestimos) {
+        for (IEmprestimo e : emprestimos) {
             if (e.getIDFerramenta() == this.idFerramenta) {
                 contador++;
             }
