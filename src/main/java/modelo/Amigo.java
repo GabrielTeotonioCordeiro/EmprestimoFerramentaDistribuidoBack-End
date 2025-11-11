@@ -160,12 +160,12 @@ public class Amigo implements IAmigo {
     }
 
     @Override
-    public int quantidadeDeEmprestimos(int id) {
+    public int quantidadeDeEmprestimos(int id) throws RemoteException {
         int som = 0;
         Emprestimo emp = new Emprestimo();
-        List<String[]> listaEmprestimo = emp.listaEmprestimo();
-        for (String[] vetor : listaEmprestimo) {
-            if (Integer.parseInt(vetor[1]) == id) {
+        List<IEmprestimo> listaEmprestimo = emp.listaEmprestimo();
+        for (IEmprestimo vetor : listaEmprestimo) {
+            if (vetor.getIDAmigo() == id) {
                 som++;
             }
         }
