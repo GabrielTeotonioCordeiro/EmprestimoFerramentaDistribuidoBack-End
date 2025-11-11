@@ -4,6 +4,7 @@ import servico.IAmigo;
 import servico.IEmprestimo;
 import dao.AmigoDAO;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Amigo implements IAmigo {
@@ -101,7 +102,7 @@ public class Amigo implements IAmigo {
     public List<String[]> listarTodos() throws RemoteException {
         AmigoDAO dao = new AmigoDAO();
         List<IAmigo> lista = dao.getListaAmigo();
-        List<String[]> resultado = null;
+        List<String[]> resultado = new ArrayList<>();
         for (IAmigo amigo : lista) {
             resultado.add(new String[]{String.valueOf(amigo.getIdAmigo()), amigo.getNomeAmigo(), amigo.getTelefone()});
         }

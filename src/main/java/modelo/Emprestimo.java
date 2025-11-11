@@ -29,7 +29,7 @@ public class Emprestimo implements IEmprestimo {
     private EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
     @Override
     public List<String[]> listaEmprestimo() throws RemoteException {
-        List <String[]> resultado = null;
+        List <String[]> resultado = new ArrayList<>();
         List <IEmprestimo> lista = emprestimoDAO.getListaEmprestimo();
         for(IEmprestimo emprestimo : lista){
             resultado.add(new String[]{String.valueOf(emprestimo.getIDEmprestimo()),

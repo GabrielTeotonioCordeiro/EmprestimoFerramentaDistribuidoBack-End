@@ -4,6 +4,7 @@ import servico.IFerramenta;
 import dao.EmprestimoDAO;
 import dao.FerramentaDAO;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 import servico.IEmprestimo;
 
@@ -116,7 +117,7 @@ public class Ferramenta implements IFerramenta {
     public List<String[]> listarTodas() throws RemoteException {
         FerramentaDAO dao = new FerramentaDAO();
         List<IFerramenta> lista = dao.getListaFerramenta();
-        List<String[]> resultado = null;
+        List<String[]> resultado = new ArrayList<>();
         for (IFerramenta ferramenta : lista) {
             resultado.add(new String[]{(ferramenta.getIdFerramenta() + ""), ferramenta.getNomeFerramenta(), ferramenta.getMarcaFerramenta(), (ferramenta.getCustoFerramenta() + "")});
         }
