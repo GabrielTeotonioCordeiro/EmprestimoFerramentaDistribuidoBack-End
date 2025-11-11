@@ -10,11 +10,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Emprestimo;
+import servico.IEmprestimo;
+
 
 public class EmprestimoDAO extends ConexaoDAO {
 
     // Lista para armazenar os dados dos empréstimos
-    protected static final List<Emprestimo> listaEmprestimo = new ArrayList<>();
+    protected static final List<IEmprestimo> listaEmprestimo = new ArrayList<>();
 
     private static final String MENSAGEM_ERRO = "Erro: ";
     private static final Logger logger = Logger.getLogger(EmprestimoDAO.class.getName());
@@ -32,7 +34,7 @@ public class EmprestimoDAO extends ConexaoDAO {
     private static final String DATA_INICIO = "dataInicio";
     private static final String DATA_DEVOLUCAO = "dataDevolucao";
 
-    public List<Emprestimo> getListaEmprestimo() {
+    public List<IEmprestimo> getListaEmprestimo() {
         // Limpa a lista para evitar duplicatas
         listaEmprestimo.clear();
         try (Statement smt = super.getConexao().createStatement()) {
@@ -58,7 +60,7 @@ public class EmprestimoDAO extends ConexaoDAO {
 
     }
 
-    public static void setListaEmprestimo(List<Emprestimo> novaLista) {
+    public static void setListaEmprestimo(List<IEmprestimo> novaLista) {
         listaEmprestimo.clear();
         listaEmprestimo.addAll(novaLista);
     }
