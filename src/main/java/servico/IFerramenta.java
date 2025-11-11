@@ -34,7 +34,7 @@ public interface IFerramenta extends Remote {
 
     public boolean deleteFerramentaDB(int id) throws RemoteException;
 
-    public String getDisponivel() throws RemoteException;
+    public String getDisponivel(int id) throws RemoteException;
 
     public boolean possuiEmprestimoAtivo() throws RemoteException;
 
