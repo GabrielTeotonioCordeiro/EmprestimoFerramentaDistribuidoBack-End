@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Amigo;
+import servico.IAmigo;
 
 /**
  * Classe responsável pelo acesso aos dados dos amigos no banco de dados.
@@ -19,7 +20,7 @@ public class AmigoDAO extends ConexaoDAO {
     /**
      * Lista de amigos em memória.
      */
-    private static ArrayList<Amigo> listaAmigo = new ArrayList<>();
+    private static ArrayList<IAmigo> listaAmigo = new ArrayList<>();
 
     private static final String MENSAGEM_ERRO = "Erro: ";
     private static final Logger logger = Logger.getLogger(AmigoDAO.class.getName());
@@ -37,8 +38,8 @@ public class AmigoDAO extends ConexaoDAO {
         logger.log(Level.SEVERE, MENSAGEM_ERRO, e);
     }
 
-    public List<Amigo> getListaAmigo() {
-        List<Amigo> lista = new ArrayList<>();
+    public List<IAmigo> getListaAmigo() {
+        List<IAmigo> lista = new ArrayList<>();
         try (Statement smt = super.getConexao().createStatement()) {
             ResultSet res = smt.executeQuery("select idAmigo, nomeAmigo, TelefoneAmigo from amigo");
             while (res.next()) {
@@ -58,7 +59,7 @@ public class AmigoDAO extends ConexaoDAO {
      *
      * @param listaAmigo Lista de amigos a ser definida.
      */
-    public static void setListaAmigo(List<Amigo> novaLista) {
+    public static void setListaAmigo(List<IAmigo> novaLista) {
         synchronized (listaAmigo) {
             listaAmigo.clear();
             listaAmigo.addAll(novaLista);
