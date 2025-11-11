@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Ferramenta;
+import servico.IFerramenta;
 
 /**
  * Classe responsável pelo acesso aos dados das ferramentas no banco de dados.
@@ -19,7 +20,7 @@ public class FerramentaDAO extends ConexaoDAO {
     /**
      * Lista de ferramentas em armazenamento.
      */
-    protected static final List<Ferramenta> listaFerramenta = new ArrayList<>();
+    protected static final List<IFerramenta> listaFerramenta = new ArrayList<>();
     private static final String MENSAGEM_ERRO = "Erro: ";
     private static final Logger logger = Logger.getLogger(FerramentaDAO.class.getName());
 
@@ -36,7 +37,7 @@ public class FerramentaDAO extends ConexaoDAO {
      *
      * @return Lista de ferramentas.
      */
-    public List<Ferramenta> getListaFerramenta() {
+    public List<IFerramenta> getListaFerramenta() {
         listaFerramenta.clear();
 
         String sql = "SELECT idFerramenta, nomeFerramenta, marcaFerramenta, custoFerramenta FROM ferramenta";
@@ -64,7 +65,7 @@ public class FerramentaDAO extends ConexaoDAO {
      *
      * @param listaFerramenta Lista de ferramentas a ser definida.
      */
-    public static void setListaFerramenta(List<Ferramenta> novaLista) {
+    public static void setListaFerramenta(List<IFerramenta> novaLista) {
         listaFerramenta.clear();
         listaFerramenta.addAll(novaLista);
 
